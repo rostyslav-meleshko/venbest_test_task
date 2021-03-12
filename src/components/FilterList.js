@@ -1,7 +1,9 @@
 import React from 'react';
 import { NAME, LASTNAME, AGE, SEX, MALE, FEMALE } from '../constants.js'
 
-export const FilterList = ({filterQuery, handleFilterQueryChange, clearfilterQuery}) => {
+export const FilterList = ({
+  filterQuery, handleFilterQueryChange, clearfilterQuery
+}) => {
 
   return (
     <div className="col">
