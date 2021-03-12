@@ -75,6 +75,7 @@ export const NewUserForm = ({ adduser }) => {
         <input
           type="number"
           min={18}
+          placeholder="Должен быть больше 18"
           className="form-control"
           name={AGE}
           value={inputs[AGE]}
