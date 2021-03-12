@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { NAME, LASTNAME, AGE, SEX, MALE, FEMALE } from '../constants';
+import { NAME, LASTNAME, AGE, SEX, MALE, FEMALE, REG_AGE_INPUT } from '../constants';
 
 export const NewUserForm = ({ adduser }) => {
   const [inputs, setInputs] = useState({
@@ -9,9 +9,13 @@ export const NewUserForm = ({ adduser }) => {
     [SEX]: '',
   });
 
-  const handleChange = ({target}) => {
-    const {name, value} = target;
+  const handleChange = (event) => {
+    const {name, value} = event.target;
 
+    if(name === AGE && (!REG_AGE_INPUT.test(value) || event.key === 69)) {
+        return;
+      };
+    
     setInputs((prevInputs) => ({
       ...prevInputs,
       [name]: value,
@@ -33,12 +37,12 @@ export const NewUserForm = ({ adduser }) => {
         [AGE]: '',
         [SEX]: '',
       });
-    }
-  }
+    };
+  };
 
   const isFormValid = useMemo(() => {
-    return Object.values(inputs).every(Boolean);
-  }, [inputs])
+    return Object.values(inputs).every(Boolean) && inputs[AGE] >= 18;
+  }, [inputs]);
 
   return (
     <div className="col">
@@ -70,11 +74,12 @@ export const NewUserForm = ({ adduser }) => {
         <span className="input-group-text fixWidth">ВОЗРАСТ</span>
         <input
           type="number"
-          min={0}
+          min={18}
           className="form-control"
           name={AGE}
           value={inputs[AGE]}
-          onChange={handleChange} />
+          onChange={handleChange}
+            />
       </div>
 
       <div className="input-group mb-1">
